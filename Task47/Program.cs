@@ -5,6 +5,30 @@ m = 3, n = 4.
 8 7,8 -7,1 9
 */
 
+int DemensionInput(string text)  //Метод ввода и проверки на число
+{
+    bool isInputInt = true;
+    int number = 0;
+    while (isInputInt)
+    {
+        Console.Write(text);
+        string numberSTR = Console.ReadLine();
+        if (int.TryParse(numberSTR, out int numberInt))
+        {
+            number = numberInt;
+            if (number <= 0) Console.WriteLine("Введите число больше нуля");
+            else
+            {
+                number = numberInt;
+                isInputInt = false;
+            }
+        }
+        else
+            Console.WriteLine("Ввели не число");
+    }
+    return number;
+}
+
 double[,] InitMatrix(int firstDemension, int secondDemension)   // Создание и наполнение матрицы
 {
     double[,] matrix = new double[firstDemension, secondDemension];
@@ -30,8 +54,8 @@ void PrintMatrix(double[,] matrix)    // Вывод матрицы в консо
     }
 }
 
-int firstDemension = 3;
-int secondDemension = 4;
+int firstDemension = DemensionInput("Введите кол-во строк:  ");
+int secondDemension = DemensionInput("Введите кол-во столбцов:  ");
 
 double[,] resultMatrix = InitMatrix(firstDemension, secondDemension);
 PrintMatrix(resultMatrix);
